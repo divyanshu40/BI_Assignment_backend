@@ -13,6 +13,19 @@ app.listen(PORT, () => {
     console.log("This server is running");
 });
 
+app.get("/seed_db", async (req, res) => {
+    try {
+        const eventsData = fs.readFileSync("events.json");
+        const events = JSON.parse(eventsData);
+        for (let eventDetails of events) {
+            new event(eventDetails).save();
+        }
+        res.status(200).json({ message: "Database seeded successfully"});
+    } catch(error) {
+        res.status(500).json({ error: error.message});
+    }
+})
+
 // function to get all events
 async function getAllEvents() {
     const events = await event.find();

@@ -44,12 +44,16 @@ const eventSchema = new mongoose.Schema({
     speakers: [
         {
             name: String,
-            designation: String
+            designation: String,
+            photoUrl: String
         }
     ],
     details: {
         type: String,
          required: true
+    },
+    image: {
+        type: String
     }
 }, {
     timestamps: true
